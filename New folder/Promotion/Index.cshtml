@@ -1,0 +1,424 @@
+﻿@model DPWD_SITE.Models.ViewModels.PromotionViewModel
+
+<div class="row marquee-box" style="margin-bottom:20px">
+    <div class="container">
+        <div class="col-lg-2 text-blue text-right running-text" id="runningTextDate"></div>
+        <div class="col-lg-10 running-text">
+            <marquee id="runningText"></marquee>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background-color: lightgrey; margin-bottom:20px; border-radius:10px">
+    <div class="row">
+        <div class="col-lg-8 main-content">
+            <div>
+                <main class="container clear">
+                    @Html.Raw(ViewBag.Contents)
+                </main>
+            </div>
+        </div>
+        <div class="col-lg-4" style="padding:20px">
+            <div class="col-lg-12" style="margin-bottom:20px;">
+                <div class="col-lg-12" style="background-color: white; padding:10px">
+                    <div class="col-lg-12 disclaimer-jadwal-offline-bank-header text-center">
+                        <span class="text-blue">JADWAL OFFLINE BANK</span>
+                    </div>
+                    <div class="col-lg-12 disclaimer-jadwal-offline-bank-body" id="bankOfflineText">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div id="togel" class="carousel" data-ride="carousel" style="">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators togel-indicator">
+                        <li data-target="#togel" data-slide-to="0" class="active"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner indicator-mini-slider-inner">
+                        <div class="item togel-div">
+                            <table class="togel">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <h3 class="text-white">@ViewBag.TogelTitle</h3>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="togel-date text-center text-yellow">
+                                        <td colspan="3">
+                                            <span>@ViewBag.TogelDate</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="togel-separator-top"></tr>
+                                    <tr>
+                                        <td class="togel-separator-sides"></td>
+                                        <td class="togel-main text-white text-center">
+                                            <h1><strong>@ViewBag.TogelText</strong></h1>
+                                        </td>
+                                        <td class="togel-separator-sides"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <span class="text-yellow">
+                                                Tutup: @ViewBag.TogelTime WIB
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div id="latestDp" class="carousel" data-ride="carousel" style="">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators indicator-mini-slider">
+                        <li data-target="#latestDp" data-slide-to="0" class="active"></li>
+                        <li data-target="#latestDp" data-slide-to="1"></li>
+                        <li data-target="#latestDp" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner indicator-mini-slider-inner">
+                        <div class="item active">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="tbl-slider-header text-center">
+                                            <span class="text-white">LATEST DEPOSIT</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 50.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 850.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 750.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 500.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                        {
+                                            if (i < 5)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="item">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="text-center tbl-slider-header">
+                                            <span class="text-white">LATEST DEPOSIT</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 350.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 850.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 550.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 2.500.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 1.150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                        {
+                                            if (i >= 5 && i < 10)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="item">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="text-center tbl-slider-header">
+                                            <span class="text-white">LATEST DEPOSIT</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 450.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 730.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 590.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 50.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                        {
+                                            if (i >= 10 && i < 15)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div id="latestWd" class="carousel" data-ride="carousel" style="">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators indicator-mini-slider">
+                        <li data-target="#latestWd" data-slide-to="0" class="active"></li>
+                        <li data-target="#latestWd" data-slide-to="1"></li>
+                        <li data-target="#latestWd" data-slide-to="2"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner indicator-mini-slider-inner">
+                        <div class="item active">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="tbl-slider-header text-center">
+                                            <span class="text-white">LATEST WITHDRAW</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 50.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 850.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 750.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 500.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                        {
+                                            if (i < 5)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="item">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="text-center tbl-slider-header">
+                                            <span class="text-white">LATEST WITHDRAW</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 350.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 850.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 550.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 2.500.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 1.150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                        {
+                                            if (i >= 5 && i < 10)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="item">
+                            <table class="table tbl-slider">
+                                <thead>
+                                    <tr>
+                                        <td colspan="3" class="text-center tbl-slider-header">
+                                            <span class="text-white">LATEST WITHDRAW</span>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 150.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 450.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 730.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 590.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fadd***</td>
+                                        <td>Rp 50.000</td>
+                                        <td>Transferred</td>
+                                    </tr>
+                                    @*@for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                        {
+                                            if (i >= 10 && i < 15)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                                    <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                                    <td class="text-center">Transferred</td>
+                                                </tr>
+                                            }
+                                        }*@
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bank-box">
+    <img class="bank-img" src="~/Resources/images/bank-logos.png" />
+</div>
+
+<div class="container" style="margin-top:20px; padding-top:20px">
+    <div class="row disclaimer-jadwal-bank-offline-box">
+        <div class="col-lg-12">
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-header">
+                <h3 class="text-blue">DISCLAIMER</h3>
+            </div>
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-body">
+                <div id="disclaimerText" class="text-blue disclaimer-text">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

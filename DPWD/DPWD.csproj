@@ -1,0 +1,418 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D0521DD-99FF-465A-9F64-95E749AC5B72}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DPWD</RootNamespace>
+    <AssemblyName>DPWD</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.10.6\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Resources\css\bootstrap-social.css" />
+    <Content Include="Resources\css\bootstrap-theme.min.css" />
+    <Content Include="Resources\css\bootstrap.min.css" />
+    <Content Include="Resources\css\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Resources\css\dataTables\dataTables.responsive.css" />
+    <Content Include="Resources\css\font-awesome.min.css" />
+    <Content Include="Resources\css\images\ui-icons_444444_256x240.png" />
+    <Content Include="Resources\css\images\ui-icons_555555_256x240.png" />
+    <Content Include="Resources\css\images\ui-icons_777620_256x240.png" />
+    <Content Include="Resources\css\images\ui-icons_777777_256x240.png" />
+    <Content Include="Resources\css\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Resources\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Resources\css\jquery-ui-1.9.2.custom.css" />
+    <Content Include="Resources\css\jquery-ui-1.9.2.custom.min.css" />
+    <Content Include="Resources\css\jquery.timepicker.css" />
+    <Content Include="Resources\css\metisMenu.min.css" />
+    <Content Include="Resources\css\morris.css" />
+    <Content Include="Resources\css\startmin.css" />
+    <Content Include="Resources\css\timeline.css" />
+    <Content Include="Resources\fonts\fontawesome-webfont.svg" />
+    <Content Include="Resources\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Resources\images\bank-logos.png" />
+    <Content Include="Resources\images\bankBCA.png" />
+    <Content Include="Resources\images\bankBNI.png" />
+    <Content Include="Resources\images\bankMandiri.png" />
+    <Content Include="Resources\images\contactBbm.png" />
+    <Content Include="Resources\images\contactLine.png" />
+    <Content Include="Resources\images\contactLiveChat.png" />
+    <Content Include="Resources\images\contactWeChat.PNG" />
+    <Content Include="Resources\images\contactWhatsApp.png" />
+    <Content Include="Resources\images\contactYahoo.png" />
+    <Content Include="Resources\images\logo-long-cropped.png" />
+    <Content Include="Resources\images\logo-long.png" />
+    <Content Include="Resources\images\logo-short.png" />
+    <Content Include="Resources\images\modal.jpg" />
+    <Content Include="Resources\images\new-logo-short.png" />
+    <Content Include="Resources\images\new-logo.png" />
+    <Content Include="Resources\images\promo1.png" />
+    <Content Include="Resources\images\promo2.png" />
+    <Content Include="Resources\images\promo3.png" />
+    <Content Include="Resources\images\promo4.png" />
+    <Content Include="Resources\images\promo5.png" />
+    <Content Include="Resources\images\promo6.png" />
+    <Content Include="Resources\images\slider1.jpg" />
+    <Content Include="Resources\images\slider2.jpg" />
+    <Content Include="Resources\images\slider3.jpg" />
+    <Content Include="Resources\images\square4LangkahBermain.png" />
+    <Content Include="Resources\images\squareBankOffline.png" />
+    <Content Include="Resources\images\squareBankSupport.png" />
+    <Content Include="Resources\images\squareContactUs.png" />
+    <Content Include="Resources\images\squareLatestNews.png" />
+    <Content Include="Resources\images\squareOurGames.png" />
+    <Content Include="Resources\images\ways-to-play.png" />
+    <Content Include="Resources\js\bootstrap.min.js" />
+    <Content Include="Resources\js\dataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Resources\js\dataTables\jquery.dataTables.min.js" />
+    <Content Include="Resources\js\flot-data.js" />
+    <Content Include="Resources\js\flot\excanvas.min.js" />
+    <Content Include="Resources\js\flot\jquery.colorhelpers.js" />
+    <Content Include="Resources\js\flot\jquery.flot.canvas.js" />
+    <Content Include="Resources\js\flot\jquery.flot.categories.js" />
+    <Content Include="Resources\js\flot\jquery.flot.crosshair.js" />
+    <Content Include="Resources\js\flot\jquery.flot.errorbars.js" />
+    <Content Include="Resources\js\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Resources\js\flot\jquery.flot.image.js" />
+    <Content Include="Resources\js\flot\jquery.flot.js" />
+    <Content Include="Resources\js\flot\jquery.flot.navigate.js" />
+    <Content Include="Resources\js\flot\jquery.flot.pie.js" />
+    <Content Include="Resources\js\flot\jquery.flot.resize.js" />
+    <Content Include="Resources\js\flot\jquery.flot.selection.js" />
+    <Content Include="Resources\js\flot\jquery.flot.stack.js" />
+    <Content Include="Resources\js\flot\jquery.flot.symbol.js" />
+    <Content Include="Resources\js\flot\jquery.flot.threshold.js" />
+    <Content Include="Resources\js\flot\jquery.flot.time.js" />
+    <Content Include="Resources\js\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Resources\js\jquery-ui-1.9.2.custom.js" />
+    <Content Include="Resources\js\jquery-ui-1.9.2.custom.min.js" />
+    <Content Include="Resources\js\jquery.mask.min.js" />
+    <Content Include="Resources\js\jquery.min.js" />
+    <Content Include="Resources\js\jquery.timepicker.js" />
+    <Content Include="Resources\js\metisMenu.min.js" />
+    <Content Include="Resources\js\morris-data.js" />
+    <Content Include="Resources\js\morris.min.js" />
+    <Content Include="Resources\js\raphael.min.js" />
+    <Content Include="Resources\js\startmin.js" />
+    <Content Include="Resources\js\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Resources\js\tinymce\license.txt" />
+    <Content Include="Resources\js\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\codesample\css\prism.css" />
+    <Content Include="Resources\js\tinymce\plugins\codesample\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Resources\js\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\help\img\logo.png" />
+    <Content Include="Resources\js\tinymce\plugins\help\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\toc\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Resources\js\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\content.mobile.min.css" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\skin.mobile.min.css" />
+    <Content Include="Resources\js\tinymce\themes\inlite\theme.min.js" />
+    <Content Include="Resources\js\tinymce\themes\mobile\theme.min.js" />
+    <Content Include="Resources\js\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Resources\js\tinymce\tinymce.min.js" />
+    <Content Include="Resources\sound\new_notification.mp3" />
+    <Content Include="Scripts\contentManagement.js" />
+    <Content Include="Scripts\withdrawal.js" />
+    <Content Include="Scripts\deposit.js" />
+    <Content Include="Scripts\member.js" />
+    <Content Include="Scripts\memberReassign.js" />
+    <Content Include="Scripts\notification.js" />
+    <Content Include="Scripts\tinymce.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContentManagementController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DepositController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\UserManagementController.cs" />
+    <Compile Include="Controllers\WithdrawalController.cs" />
+    <Compile Include="DAL\DAL.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Models\PromotionModel.cs" />
+    <Compile Include="Models\BankDepositModel.cs" />
+    <Compile Include="Models\BankModel.cs" />
+    <Compile Include="Models\ContentManagementModel.cs" />
+    <Compile Include="Models\DepositSearchModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\DepositModel.cs" />
+    <Compile Include="Models\Enum\ContentType.cs" />
+    <Compile Include="Models\Enum\NotificationStatus.cs" />
+    <Compile Include="Models\Enum\Availability.cs" />
+    <Compile Include="Models\Enum\Status.cs" />
+    <Compile Include="Models\GameTypeModel.cs" />
+    <Compile Include="Models\MemberModel.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
+    <Compile Include="Models\TogelModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserNameModel.cs" />
+    <Compile Include="Models\ViewModel\ContentManagementViewModel.cs" />
+    <Compile Include="Models\ViewModel\DepositViewModel.cs" />
+    <Compile Include="Models\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\MemberViewModel.cs" />
+    <Compile Include="Models\ViewModel\SettingsViewModel.cs" />
+    <Compile Include="Models\ViewModel\WithdrawalViewModel.cs" />
+    <Compile Include="Models\ViewModel\UserViewModel.cs" />
+    <Compile Include="Models\WithdrawalModel.cs" />
+    <Compile Include="Models\WithdrawalSearchModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <None Include="packages.config" />
+    <Content Include="Resources\fonts\fontawesome-webfont.eot" />
+    <Content Include="Resources\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Resources\fonts\fontawesome-webfont.woff" />
+    <Content Include="Resources\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Resources\fonts\FontAwesome.otf" />
+    <Content Include="Resources\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Resources\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Resources\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Resources\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\ContentManagement\BankDepositModal.cshtml" />
+    <Content Include="Views\ContentManagement\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Deposit\DepositModal.cshtml" />
+    <Content Include="Views\Deposit\DepositNotesModal.cshtml" />
+    <Content Include="Views\Deposit\Index.cshtml" />
+    <Content Include="Views\Deposit\Reports.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Member\MemberModal.cshtml" />
+    <Content Include="Views\Member\MemberNotesModal.cshtml" />
+    <Content Include="Views\Member\MemberReAssignModal.cshtml" />
+    <Content Include="Views\Settings\BankModal.cshtml" />
+    <Content Include="Views\Settings\GameTypeModal.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Settings\UserNameModal.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\UserManagement\Index.cshtml" />
+    <Content Include="Views\UserManagement\UserManagementModal.cshtml" />
+    <Content Include="Views\Withdrawal\Index.cshtml" />
+    <Content Include="Views\Withdrawal\Reports.cshtml" />
+    <Content Include="Views\Withdrawal\WithdrawalModal.cshtml" />
+    <Content Include="Views\Withdrawal\WithdrawalNotesModal.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Resources\js\tinymce\langs\readme.md" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Resources\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Resources\css\images\Thumbs.db" />
+    <Content Include="Views\ContentManagement\PromotionModal.cshtml" />
+    <Content Include="Views\Login\ResetPassword.cshtml" />
+    <Content Include="Views\ContentManagement\GameModal.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49984</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49984/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

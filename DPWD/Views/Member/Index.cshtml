@@ -1,0 +1,148 @@
+﻿@model DPWD.Models.MemberViewModel
+
+<div class="panel-body">
+    @if (Model.Message != null && Model.RequestStatus == "Success")
+    {
+        <div class="alert alert-success" id="alert">
+            <button type="button" class="close" data-dismiss="alert-success">x</button>
+            <strong>@Model.RequestStatus! </strong>
+            @Model.Message
+        </div>
+    }
+    @if (Model.Message != null && Model.RequestStatus == "Error")
+    {
+        <div class="alert alert-danger" id="alert">
+            <button type="button" class="close" data-dismiss="alert-error">x</button>
+            <strong>@Model.RequestStatus! </strong>
+            @Model.Message
+        </div>
+    }
+        
+    <div class="well filterCustom">
+        @using (Html.BeginForm("Index", "Member", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-sm-3" style="height:54px">
+                    Games
+                    @Html.DropDownListFor(model => model.MemberModel.GameType, ViewBag.GameType as SelectList, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    Username
+                    @Html.TextBoxFor(model => model.MemberModel.UserName, new { placeholder = "Username", @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    Bank
+                    @Html.DropDownListFor(model => model.MemberModel.BankAccount, ViewBag.BankAccount as SelectList, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    No. Rek.
+                    @Html.TextBoxFor(model => model.MemberModel.BankAccountNumber, new { placeholder = "No. Rek.", @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" style="height:54px">
+                    Nama Rek.
+                    @Html.TextBoxFor(model => model.MemberModel.BankAccountName, new { placeholder = "Nama Rek.", @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    Email
+                    @Html.TextBoxFor(model => model.MemberModel.EmailAddress, new { placeholder = "Email", @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    Phone
+                    @Html.TextBoxFor(model => model.MemberModel.PhoneNumber, new { placeholder = "Phone", @class = "form-control" })
+                </div>
+                <div class="col-sm-3" style="height:54px">
+                    Status
+                    @Html.DropDownListFor(model => model.MemberModel.Status, ViewBag.Status as SelectList, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" style="height:54px; position: relative;">
+                    <button class="btn btn-primary" style="position: absolute; bottom: 0; width: 86%;" type="submit">
+                        <i class="fa fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="col-sm-3" style="height:54px; position: relative;">
+                    <button id="addMember" class="btn btn-primary" style="position: absolute; bottom: 0; width: 86%;" type="button" data-toggle="modal" onclick="showModal('AddMember', '#addOrEditModal', '#addOrEditModalBody', null)">
+                        <i class="fa fa-plus"></i> Add Member
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="dataTable_wrapper table-container">
+        <table class="table table-striped table-bordered table-hover" id="tbl-members" style="font-size: 15px;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Games</th>
+                    <th>Username</th>
+                    <th>Bank</th>
+                    <th>No. Rek.</th>
+                    <th>Nama Rek.</th>
+                    <th>Email</th>
+                    <th>Telp</th>
+                    <th>Reg Date</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.MemberModelList)
+                {
+                    <tr class="odd gradeX">
+                        <td>@item.Id</td>
+                        <td>@item.GameTypeName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.BankName</td>
+                        <td>@item.BankAccountNumber</td>
+                        <td>@item.BankAccountName</td>
+                        <td>@item.EmailAddress</td>
+                        <td>@item.PhoneNumber</td>
+                        <td><span style="display:none">@item.RegistrationDate.Value.ToString("yyyy/MM/dd HH:mm:ss")</span>@item.RegistrationDate.Value.ToString("dd/MM/yyyy hh:mm:ss tt")</td>
+                        <td>@item.Status</td>
+                        <td style="">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="javascript:void(0)" data-toggle="modal" onclick="showModal('ReAssign', '#addOrEditModal', '#addOrEditModalBody', @item.Id)"><span class="fa fa-user"></span></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="javascript:void(0)" data-toggle="modal" onclick="showModal('EditMember', '#addOrEditModal', '#addOrEditModalBody', @item.Id)">
+                                        <span class="fa fa-pencil"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="@Url.Action("Delete", "Member", new { id = item.Id })" onclick="return confirm('Are sure you want to delete this member?');">
+                                        <span class="fa fa-trash"></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="@item.Notes" onclick="showModal('EditNotes', '#addOrEditModal', '#addOrEditModalBody', @item.Id)">
+                                        <span class="fa fa-sticky-note"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.table-responsive -->
+</div>
+
+<div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="addOrEditModalBody"></div>
+</div>
+
+<script src="~/Resources/js/jquery.min.js"></script>
+<script src="~/Scripts/member.js"></script>
+

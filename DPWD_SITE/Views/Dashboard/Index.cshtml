@@ -1,0 +1,484 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@using System.Globalization;
+@model DPWD_SITE.Models.DashboardModel
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 9999; /* Sit on top */
+        padding-top: 300px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        display: none;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+
+<div id="myCarousel" class="carousel" data-ride="carousel" style="">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @{
+            int count = 0;
+            if (ViewBag.DashboardImage1 != "(EMPTY)")
+            {
+                count += 1;
+            }
+            if (ViewBag.DashboardImage2 != "(EMPTY)")
+            {
+                count += 1;
+            }
+            if (ViewBag.DashboardImage3 != "(EMPTY)")
+            {
+                count += 1;
+            }
+
+            if (count == 1)
+            {
+                <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+            }
+            else if (count == 2)
+            {
+                <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselDashboardImage" data-slide-to="1"></li>
+            }
+            else
+            {
+                <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselDashboardImage" data-slide-to="1"></li>
+                <li data-target="#carouselDashboardImage" data-slide-to="2"></li>
+            }
+        }
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        @{
+            bool active = false;
+            if (ViewBag.DashboardImage1 != "(EMPTY)")
+            {
+                <div class="item active">
+                    <img src="~/Resources/images/slider1.jpg" class="img-slider" />
+                </div>
+                active = true;
+            }
+            if (ViewBag.DashboardImage2 != "(EMPTY)")
+            {
+                if (active)
+                {
+                    <div class="item">
+                        <img src="~/Resources/images/slider2.jpg" class="img-slider" />
+                    </div>
+                }
+                else
+                {
+                    <div class="item active">
+                        <img src="~/Resources/images/slider2.jpg" class="img-slider" />
+                    </div>
+                    active = true;
+                }
+            }
+            if (ViewBag.DashboardImage3 != "(EMPTY)")
+            {
+                if (active)
+                {
+                    <div class="item">
+                        <img src="~/Resources/images/slider3.jpg" class="img-slider" />
+                    </div>
+                }
+                else
+                {
+                    <div class="item active">
+                        <img src="~/Resources/images/slider3.jpg" class="img-slider" />
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+
+<div class="row marquee-box">
+    <div class="container">
+        <div class="col-lg-2 text-blue text-right running-text" id="runningTextDate"></div>
+        <div class="col-lg-10 running-text">
+            <marquee id="runningText"></marquee>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row ways-to-play-box">
+        <img class="ways-to-play-img" src="~/Resources/images/ways-to-play.png" />
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="latestDp" class="carousel" data-ride="carousel" style="">
+                <!-- Indicators -->
+                <ol class="carousel-indicators indicator-mini-slider">
+                    <li data-target="#latestDp" data-slide-to="0" class="active"></li>
+                    <li data-target="#latestDp" data-slide-to="1"></li>
+                    <li data-target="#latestDp" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner indicator-mini-slider-inner">
+                    <div class="item active">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="tbl-slider-header text-center">
+                                        <span class="text-white">LATEST DEPOSIT</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                {
+                                    if (i < 5)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                            <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="item">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="text-center tbl-slider-header">
+                                        <span class="text-white">LATEST DEPOSIT</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                {
+                                    if (i >= 5 && i < 10)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                            <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="item">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="text-center tbl-slider-header">
+                                        <span class="text-white">LATEST DEPOSIT</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.DepositModelList.Count; i++)
+                                {
+                                    if (i >= 10 && i < 15)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.DepositModelList[i].UserName</td>
+                                            <td class="text-right">@Model.DepositModelList[i].DepositAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="latestWd" class="carousel" data-ride="carousel" style="">
+                <!-- Indicators -->
+                <ol class="carousel-indicators indicator-mini-slider">
+                    <li data-target="#latestWd" data-slide-to="0" class="active"></li>
+                    <li data-target="#latestWd" data-slide-to="1"></li>
+                    <li data-target="#latestWd" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner indicator-mini-slider-inner">
+                    <div class="item active">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="tbl-slider-header text-center">
+                                        <span class="text-white">LATEST WITHDRAW</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                {
+                                    if (i < 5)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                            <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="item">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="text-center tbl-slider-header">
+                                        <span class="text-white">LATEST WITHDRAW</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                {
+                                    if (i >= 5 && i < 10)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                            <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="item">
+                        <table class="table tbl-slider">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="text-center tbl-slider-header">
+                                        <span class="text-white">LATEST WITHDRAW</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.WithdrawalModelList.Count; i++)
+                                {
+                                    if (i >= 10 && i < 15)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Model.WithdrawalModelList[i].UserName</td>
+                                            <td class="text-right">@Model.WithdrawalModelList[i].WithdrawalAmount.ToString("C", CultureInfo.GetCultureInfo("id-ID"))</td>
+                                            <td class="text-center">Transferred</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div id="togel" class="carousel" data-ride="carousel" style="">
+                <!-- Indicators -->
+                <ol class="carousel-indicators togel-indicator">
+                    <li data-target="#togel" data-slide-to="0" class="active"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner indicator-mini-slider-inner">
+                    <div class="item togel-div">
+                        <table class="togel">
+                            <thead>
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <h3 class="text-white">@ViewBag.TogelTitle</h3>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="togel-date text-center text-yellow">
+                                    <td colspan="3">
+                                        <span>@ViewBag.TogelDate</span>
+                                    </td>
+                                </tr>
+                                <tr class="togel-separator-top"></tr>
+                                <tr>
+                                    <td class="togel-separator-sides"></td>
+                                    <td class="togel-main text-white text-center">
+                                        <h1><strong>@ViewBag.TogelText</strong></h1>
+                                    </td>
+                                    <td class="togel-separator-sides"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-center">
+                                        <span class="text-yellow">
+                                            Tutup: @ViewBag.TogelTime WIB
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bank-box">
+    <img class="bank-img" src="~/Resources/images/bank-logos.png" />
+</div>
+
+<div class="container" style="margin-top:20px; padding-top:20px">
+    <div class="row disclaimer-jadwal-bank-offline-box">
+        <div class="col-lg-6 disclaimer-box">
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-header">
+                <h3 class="text-black bold700">DISCLAIMER</h3>
+            </div>
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-body">
+                <div id="disclaimerText" class="text-black disclaimer-text">
+
+                </div>
+                @Html.ActionLink("Register NOW!", "Index", "Registration", null, new { @class = "btn btn-primary btn-register-now" })
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-header">
+                <h3 class="text-black bold700">JADWAL OFFLINE BANK</h3>
+            </div>
+            <div class="col-lg-12 disclaimer-jadwal-offline-bank-body" id="bankOfflineText">
+                @*<div class="text-blue jadwal-offline-bank-text">
+                        BCA
+                        <p class="bank-offline-text">Hari Senin - Jumat : Offline dari pukul 21.00 WIB - 00.30 / 01.00 WIB.</p>
+                        <p class="bank-offline-text">Hari Sabtu : Offline dari pukul 01.00 WIB - 03.30 WIB.</p>
+                        <p class="bank-offline-text">Hari Minggu : Selalu online selama 24 jam kecuali gangguan.</p>
+                    </div>
+                    <div class="text-blue jadwal-offline-bank-text">
+                        MANDIRI
+                        <p class="bank-offline-text">Hari Senin - Minggu : Offline dari pukul 22.45 WIB - 04.00.</p>
+                    </div>
+                    <div class="text-blue jadwal-offline-bank-text">
+                        BNI
+                        <p class="bank-offline-text">Hari Senin - Minggu : Selalu online selama 24 jam kecuali gangguan.</p>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="text-align:center; padding:0px; margin-top:-100px; min-width:250px">
+        <div id="modalContent" style="width:100%">
+            <div id="btnClose" style="background-color:white; position:absolute; right:0; width:3%; cursor:pointer; z-index:9999999 !important">
+                &times;
+            </div>
+            <img src="~/Resources/images/modal.jpg" style="width: 100%"/>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script>
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    //span.onclick = function () {
+    //    modal.style.display = "none";
+    //}
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    $("#btnClose").click(function () {
+        modal.style.display = "none";
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/ContentManagement/GetPopUp",
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                if (res) {
+                    var status = "No";
+                    for (var i = 0; i < Object.keys(res).length; i++) {
+                        if (res[i]['Type'] == 32) {
+                            status = res[i]['Contents'];
+                        }
+                        if (res[i]['Type'] == 33) {
+                            if (status == "Yes") {
+                                modal.style.display = "block";
+                            }
+                            $("#modalContent").append(res[i]['Contents']);
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>

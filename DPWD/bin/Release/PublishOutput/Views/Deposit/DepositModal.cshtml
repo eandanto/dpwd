@@ -1,0 +1,73 @@
+﻿@model DPWD.Models.DepositModel
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("Insert", "Deposit", FormMethod.Post))
+            {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Deposit Form</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3">Game/Product</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.DropDownListFor(model => model.GameType, ViewBag.GameType as SelectList, new { @class = "form-control", id = "addOrEditGameType" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Username</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.UserName, new { placeholder = "Username", @class = "form-control", id = "addOrEditUserName", onblur = "checkUserName()" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Bank</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.DropDownListFor(model => model.BankAccount, ViewBag.BankAccount as SelectList, new { @class = "form-control", id = "addOrEditBankAccount" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">No. Rek.</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.BankAccountNumber, new { placeholder = "No. Rek.", @class = "form-control", id = "addOrEditBankAccountNumber", @type = "number" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Nama Rek.</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.BankAccountName, new { placeholder = "Nama Rek.", @class = "form-control", id = "addOrEditBankAccountName" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Date</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.DepositDate, new { placeholder = "Date", @class = "form-control", id = "addOrEditDate" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Amount</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.DepositAmount, new { placeholder = "Amount", @class = "form-control", id = "addOrEditAmount", @type = "number" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Notes</div>
+                    <div class="col-sm-9">
+                        @Html.TextAreaFor(model => model.Notes, new { placeholder = "Notes", @class = "form-control", id = "addOrEditNotes" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelAddOrEdit" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Deposit</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#addOrEditDate').datepicker({ dateFormat: 'dd-MM-yy' });
+    });
+</script>

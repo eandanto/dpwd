@@ -1,0 +1,26 @@
+﻿@model DPWD.Models.GameTypeModel
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm("AddGameType", "Settings", FormMethod.Post))
+            {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Add Game Type</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3">Game Name</div>
+                    <div class="col-sm-9" style="height:54px">
+                        @Html.TextBoxFor(model => model.GameType, new { placeholder = "Game Name", @class = "form-control", id = "addOrEditGameName" })
+                    </div>
+                </div>
+                @Html.TextBoxFor(model => model.Id, new {@class = "form-control", @style = "visibility:hidden;" })
+            </div>
+                <div class="modal-footer">
+                    <button id="cancelAddOrEdit" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Game Type</button>
+                </div>
+        }
+    </div>
+</div>

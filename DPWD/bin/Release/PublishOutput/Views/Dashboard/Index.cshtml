@@ -1,0 +1,78 @@
+﻿@model DPWD.Models.DashboardModel
+
+<div class="row" style="margin-top:10px; font-size:17px">
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <p><i class="fa fa-user fa-fw"></i></p>
+                <p>Today's Member(s)</p>
+                <p><small><span id="memberAmt">@Model.TodaysMembers</span></small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <p><i class="fa fa-download fa-fw"></i></p>
+                <p>Today's Deposit(s)</p>
+                <p id="depositTxt"><small>Rp <span id="depositAmt">@Model.TodaysDepositsAmount</span></small></p>
+                <p><small>@Model.TodaysDeposits transaction(s)</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <p><i class="fa fa-upload fa-fw"></i></p>
+                <p>Today's Withdrawal(s)</p>
+                <p id="withdrawalTxt"><small>Rp <span id="withdrawalAmt">@Model.TodaysWithdrawalAmount</span></small></p>
+                <p><small>@Model.TodaysWithdrawal transaction(s)</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <p><i class="fa fa-heart fa-fw"></i></p>
+                <p>Today's Total</p>
+                <p id="totalTxt">
+                    <small>
+                        Rp <span id="negative" style="display:none; color:red">-</span><span id="totalAmt">
+                            @Model.TodaysTotalAmount
+                        </span>
+                    </small>
+                </p>
+                <p><small>@Model.TodaysTotal transaction(s)</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Resources/js/jquery.min.js"></script>
+<script src="~/Resources/js/jquery.mask.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        if ($('#totalAmt').html() > 0) {
+            $('#totalTxt').css('color', 'blue');
+        }
+        else if ($('#totalAmt').html() < 0) {
+            $('#totalTxt').css('color', 'red');
+        }
+        else {
+            $('#totalTxt').css('color', 'black');
+        }
+
+        if ($('#totalAmt').html().indexOf('-') != -1) {
+            $('#negative').show();
+        }
+        else {
+            $('#negative').hide();
+        }
+
+        $("#totalAmt").mask('000.000.000.000.000', { reverse: true });
+        $("#depositAmt").mask('000.000.000.000.000', { reverse: true });
+        $("#withdrawalAmt").mask('000.000.000.000.000', { reverse: true });
+        $("#memberAmt").mask('000.000.000.000.000', { reverse: true });
+    });
+</script>

@@ -1,0 +1,347 @@
+﻿body {
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.btn-register-now{
+    margin-top:20px;
+}
+
+.bank-offline-text{
+    font-size:13px;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.nav-ul{
+    width:100%;
+}
+
+.nav-li{
+    width: 14%;
+}
+
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.nav-div {
+    background-color: #006CBF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.nav-a{
+    color:white;
+}
+
+.header-box {
+    background-color: #006CBF;
+    width:100%;
+    height:25px;
+    margin-left:0px;
+}
+
+.bank-box {
+    background-color: #006CBF;
+    width: 100%;
+    height: 125px;
+    margin-left: 0px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.ways-to-play-box {
+    width: 100%;
+    margin-left: 0px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px dotted #006CBF;
+}
+
+.bank-img{
+    width:750px;
+    height:150px;
+    padding-bottom: 20px;
+}
+
+.ways-to-play-img {
+    width: 800px;
+    height: 150px;
+    padding-bottom: 20px;
+}
+
+.logo-long{
+    width: 500px;
+    height:100px;
+    margin-top:20px;
+    margin-bottom:20px;
+    display:inline-block;
+}
+
+.logo-short {
+    width: 225px;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display:none;
+}
+
+.footer-box {
+    width: 100%;
+    margin-left: 0px;
+    text-align: center;
+    border-top: 1px dotted #006CBF;
+    padding:20px;
+}
+
+.bold700{
+    font-weight:700;
+}
+
+.marquee-box {
+    border-bottom: 2px solid #006CBF;
+    border-top: 2px solid #006CBF;
+}
+
+.disclaimer-jadwal-bank-offline-box {
+    margin-bottom: 20px;
+}
+
+.disclaimer-box {
+    border-right: 1px dotted black;
+}
+
+.disclaimer-jadwal-offline-bank-header {
+    padding: 0px 50px 10px 50px;
+    border-bottom: 1px dotted black;
+}
+
+.disclaimer-jadwal-offline-bank-body {
+    padding: 0px 50px 10px 50px;
+}
+
+.disclaimer-text {
+    padding-top: 10px;
+}
+
+.jadwal-offline-bank-text {
+    padding-top:10px;
+    border-bottom:1px dotted black;
+}
+
+.footer-text {
+    margin-right: 5em;
+}
+
+.footer-menu{
+    display:block;
+}
+
+.text-blue {
+    color: #006CBF !important;
+}
+
+.text-black {
+    color: black !important;
+}
+
+.img-slider {
+    width: 100%;
+    height: 300px;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-li {
+        width: auto;
+    }
+
+    .logo-long {
+        display:none;
+    }
+
+    .logo-short {
+        display: inline-block;
+        width: 300px;
+    }
+
+    .bank-img {
+        width: 370px;
+        height: 100px;
+        padding-bottom: 0px;
+        padding-top:20px;
+    }
+
+    .ways-to-play-img {
+        width: 350px;
+        height: 70px;
+        padding-bottom: 0px;
+    }
+
+    .copyright-text {
+        color: #006CBF;
+    }
+
+    .disclaimer-box {
+        border: none;
+    }
+
+    .footer-menu {
+        display: none;
+    }
+
+    .copyright {
+        font-size: 8px !important;
+    }
+
+    .img-slider {
+        height: 100px;
+    }
+
+    .modal-content{
+        width:100% !important;
+    }
+}
+
+.copyright{
+    font-size:13px;
+}
+
+.running-text {
+    padding-top:6px;
+}
+
+.example1 {
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .example1 p {
+        font-size: 1em;
+        color: #006CBF;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin: 2px 0px 0px 0px;
+        line-height: 25px;
+        text-align: center;
+        /* Starting position */
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        /* Apply animation to this element */
+        -moz-animation: example1 30s linear infinite;
+        -webkit-animation: example1 30s linear infinite;
+        animation: example1 30s linear infinite;
+    }
+
+
+.tbl-slider{
+    background-color:white;
+}
+
+.tbl-slider-header {
+    background-color: #006CBF;
+}
+
+.text-white{
+    color:white !important;
+}
+
+.indicator-mini-slider {
+    bottom: -20px;
+}
+
+.indicator-mini-slider-inner {
+    margin-bottom: 20px;
+}
+
+.indicator-mini-slider li {
+    border: 1px solid #006CBF;
+}
+
+.indicator-mini-slider .active {
+    background-color: #006CBF;
+}
+
+.togel-div {
+    height: 220px;
+    background-color: #006CBF;
+}
+
+.togel {
+    width:100%;
+    height:190px;
+}
+
+.togel-indicator {
+    bottom: -5px;
+}
+
+.togel-date{
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.togel-main{
+    border: 1px solid white
+}
+
+.togel-separator-top{
+    height:10px;
+}
+
+.togel-separator-sides{
+    width:50px;
+}
+
+.text-yellow{
+    color:yellow;
+}
+
+.text-red {
+    color: red;
+}
+
+.img-deposit {
+    width: 100px;
+    height: 50px;
+}
+
+.img-contacts {
+    width: 100px;
+    height: 100px;
+}
+
+.main-content{
+    max-height:1255px;
+    overflow-y:auto;
+}
+
+popup-modal {
+    width: 100px;
+    height: 50px;
+    position: fixed;
+    top: calc(50% - 25px);
+    left: calc(50% - 50px);
+}
+
+.hide{
+    display:none !important;
+}

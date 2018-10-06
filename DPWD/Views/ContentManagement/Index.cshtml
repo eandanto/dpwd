@@ -1,0 +1,1010 @@
+﻿@model DPWD.Models.ContentManagementViewModel
+
+<script src="~/Resources/js/jquery.min.js"></script>
+<script src="~/Resources/js/bootstrap.min.js"></script>
+<script src="~/Resources/js/tinymce/jquery.tinymce.min.js"></script>
+<script src="~/Resources/js/tinymce/tinymce.min.js"></script>
+<script>
+    function onTabClicked(tab) {
+        window.sessionStorage.activeTab = tab;
+    }
+
+    function getActiveTab() {
+        if (window.sessionStorage.activeTab) {
+            $("#" + sessionStorage.activeTab).click();
+        }
+        else {
+            $("#mainTab").click();
+        }
+    }
+
+    $(document).ready(function () {
+        setTimeout(function () {
+            $(".alert").slideUp(500);
+        }, 3000);
+
+        getActiveTab();
+
+        tinymce.init({
+            selector: '#runningText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#disclaimerText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#registrationText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#depositText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#withdrawalText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#promotionText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#contactUsText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#bankOfflineText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        tinymce.init({
+            selector: '#popUpText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+        //tinymce.init({
+        //          selector: '#scriptHeaderText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+        //          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        //      });
+        //tinymce.init({
+        //          selector: '#scriptBodyText', min_height: 300, plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste imagetools wordcount"],
+        //          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        //      });
+
+        $('.carousel').carousel();
+        $('#togelDate').datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 60,
+            minTime: '0',
+            maxTime: '11:00pm',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+    });
+</script>
+
+@if (Model.Message != null && Model.RequestStatus == "Success")
+{
+    <div class="alert alert-success" id="alert">
+        <button type="button" class="close" data-dismiss="alert-success">x</button>
+        <strong>@Model.RequestStatus! </strong>
+        @Model.Message
+    </div>
+}
+@if (Model.Message != null && Model.RequestStatus == "Error")
+{
+    <div class="alert alert-danger" id="alert">
+        <button type="button" class="close" data-dismiss="alert-error">x</button>
+        <strong>@Model.RequestStatus! </strong>
+        @Model.Message
+    </div>
+}
+
+    <ul class="nav nav-tabs" style="font-size:11px">
+        <li class="customTab"><a id="mainTab" data-toggle="tab" href="#main" onclick="onTabClicked('mainTab')">Main</a></li>
+        <li class="customTab"><a id="dashboardImageTab" data-toggle="tab" href="#imgSlider" onclick="onTabClicked('dashboardImageTab')">Dashboard Images</a></li>
+        <li class="customTab"><a id="registrationTab" data-toggle="tab" href="#registration" onclick="onTabClicked('registrationTab')">Registration Text</a></li>
+        <li class="customTab"><a id="depositTab" data-toggle="tab" href="#deposit" onclick="onTabClicked('depositTab')">Deposit Text</a></li>
+        <li class="customTab"><a id="withdrawalTab" data-toggle="tab" href="#withdrawal" onclick="onTabClicked('withdrawalTab')">Withdrawal Text</a></li>
+        <li class="customTab"><a id="promotionTab" data-toggle="tab" href="#promotion" onclick="onTabClicked('promotionTab')">Promotion Text</a></li>
+        <li class="customTab"><a id="gameTab" data-toggle="tab" href="#gameslist" onclick="onTabClicked('gameTab')">Games List</a></li>
+        <li class="customTab"><a id="contactUsTab" data-toggle="tab" href="#contact" onclick="onTabClicked('contactUsTab')">Contact Us Text</a></li>
+        <li class="customTab"><a id="bankTab" data-toggle="tab" href="#bank" onclick="onTabClicked('bankTab')">Bank</a></li>
+        <li class="customTab"><a id="togelTab" data-toggle="tab" href="#togel" onclick="onTabClicked('togelTab')">Togel</a></li>
+        <li class="customTab"><a id="scriptsTab" data-toggle="tab" href="#scripts" onclick="onTabClicked('scriptsTab')">Scripts</a></li>
+        <li class="customTab"><a id="popUpModalTab" data-toggle="tab" href="#popUpModal" onclick="onTabClicked('popUpModalTab')">Pop Up Modal</a></li>
+    </ul>
+
+<div class="tab-content">
+    <div id="main" class="tab-pane fade in active">
+        <h3>Macan 303 Logos</h3>
+        <div class="row">
+            <div class="col-lg-2">
+                Main Logo
+            </div>
+            @using (Html.BeginForm("UpdateMainLogoImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-3">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 500px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-5 text-center">
+                <img src="~/Resources/images/new-logo.png" style="width:200px; height:50px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                Short Logo
+            </div>
+            @using (Html.BeginForm("UpdateShortLogoImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-3">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 300px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-5 text-center">
+                <img src="~/Resources/images/new-logo-short.png" style="width:100px; height:50px" />
+            </div>
+        </div>
+        <hr />
+        @using (Html.BeginForm("UpdateRunningText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Running Text</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.RunningTextModel.Contents, new { @class = "textarea-2", name = "content", id = "runningText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+        <hr />
+        @using (Html.BeginForm("UpdateDisclaimerText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Disclaimer</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.DisclaimerModel.Contents, new { @class = "textarea-2", name = "content", id = "disclaimerText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+        <hr />
+        @using (Html.BeginForm("UpdateBankOfflineText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Jadwal Offline Bank</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.BankOfflineModel.Contents, new { @class = "textarea-2", name = "content", id = "bankOfflineText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="imgSlider" class="tab-pane fade">
+        <h3>Ways to Play Image</h3>
+        @using (Html.BeginForm("UpdateWaysToPlayImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">File</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png and .gif only</small>
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 800px x 150px</small>
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+        <div class="row" style="padding-top:50px">
+            <div class="col-lg-12 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/ways-to-play.png" />
+            </div>
+        </div>
+        <hr />
+        <h3>Image Slider</h3>
+        <div class="row" style="padding-top:20px">
+            <table class="table-striped" width="100%">
+                <tbody>
+                    <tr>
+                        @using (Html.BeginForm("UpdateDashboardImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <td><input name="index" value="1" class="form-control" style="width:35px"></td>
+                            <td>@Model.DashboardImage1.Contents</td>
+                            <td>
+                                <input type="file" name="file" accept=".jpg" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                                <small id="fileHelp" class="form-text text-muted">Accepts .jpg only</small>
+                                <small id="fileHelp" class="form-text text-muted">Image size must be 1200px x 300px</small>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </td>
+                        }
+                        <td>
+                            <a href="/ContentManagement/DeleteDashboardImage?id=1" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        @using (Html.BeginForm("UpdateDashboardImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <td><input name="index" value="2" class="form-control" style="width:35px"></td>
+                            <td>@Model.DashboardImage2.Contents</td>
+                            <td>
+                                <input type="file" name="file" accept=".jpg" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                                <small id="fileHelp" class="form-text text-muted">Accepts .jpg only</small>
+                                <small id="fileHelp" class="form-text text-muted">Image size must be 1200px x 300px</small>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </td>
+                        }
+                        <td>
+                            <a href="/ContentManagement/DeleteDashboardImage?id=2" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        @using (Html.BeginForm("UpdateDashboardImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <td><input name="index" value="3" class="form-control" style="width:35px"></td>
+                            <td>@Model.DashboardImage3.Contents</td>
+                            <td>
+                                <input type="file" name="file" accept=".jpg" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                                <small id="fileHelp" class="form-text text-muted">Accepts .jpg only</small>
+                                <small id="fileHelp" class="form-text text-muted">Image size must be 1200px x 300px</small>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </td>
+                        }
+                        <td>
+                            <a href="/ContentManagement/DeleteDashboardImage?id=3" class="btn btn-primary">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row" style="padding-top:50px">
+            <div id="carouselDashboardImage" class="carousel slide" data-ride="carousel" style="padding-bottom:20px;">
+                <ol class="carousel-indicators">
+                    @{
+                        int count = 0;
+                        if (Model.DashboardImage1.Contents != "(EMPTY)")
+                        {
+                            count += 1;
+                        }
+                        if (Model.DashboardImage2.Contents != "(EMPTY)")
+                        {
+                            count += 1;
+                        }
+                        if (Model.DashboardImage2.Contents != "(EMPTY)")
+                        {
+                            count += 1;
+                        }
+
+                        if (count == 1)
+                        {
+                            <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+                        }
+                        else if (count == 2)
+                        {
+                            <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselDashboardImage" data-slide-to="1"></li>
+                        }
+                        else
+                        {
+                            <li data-target="#carouselDashboardImage" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselDashboardImage" data-slide-to="1"></li>
+                            <li data-target="#carouselDashboardImage" data-slide-to="2"></li>
+                        }
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @{
+                        bool active = false;
+                        if (Model.DashboardImage1.Contents != "(EMPTY)")
+                        {
+                            <div class="item active">
+                                <img class="d-block w-100" src="~/Resources/images/slider1.jpg" style="width:952px;height:300px">
+                            </div>
+                            active = true;
+                        }
+                        if (Model.DashboardImage2.Contents != "(EMPTY)")
+                        {
+                            if (active)
+                            {
+                                <div class="item">
+                                    <img class="d-block w-100" src="~/Resources/images/slider2.jpg" style="width:952px;height:300px">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item active">
+                                    <img class="d-block w-100" src="~/Resources/images/slider2.jpg" style="width:952px;height:300px">
+                                </div>
+                                active = true;
+                            }
+                        }
+                        if (Model.DashboardImage3.Contents != "(EMPTY)")
+                        {
+                            if (active)
+                            {
+                                <div class="item">
+                                    <img class="d-block w-100" src="~/Resources/images/slider3.jpg" style="width:952px;height:397px">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="item active">
+                                    <img class="d-block w-100" src="~/Resources/images/slider3.jpg" style="width:952px;height:397px">
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselDashboardImage" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselDashboardImage" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="registration" class="tab-pane fade">
+
+        @using (Html.BeginForm("UpdateRegisterText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Registration Text</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.RegisterModel.Contents, new { @class = "textarea-2", name = "content", id = "registrationText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="deposit" class="tab-pane fade">
+        @using (Html.BeginForm("UpdateDepositText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Deposit Text</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.DepositModel.Contents, new { @class = "textarea-2", name = "content", id = "depositText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="withdrawal" class="tab-pane fade">
+        @using (Html.BeginForm("UpdateWithdrawalText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Withdrawal Text</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.WithdrawalModel.Contents, new { @class = "textarea-2", name = "content", id = "withdrawalText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="promotion" class="tab-pane fade">
+        <h3>Promotion</h3>
+        <table class="table-striped" style="width:100%; margin-bottom:20px">
+            @foreach (var item in Model.PromotionList)
+            {
+                <tr>
+                    <td>@item.PromotionName</td>
+                    <td class="text-center"><img src='@string.Format("/Resources/images/{0}", item.PromotionName + ".png")' style="width:100px; height:50px" /></td>
+
+                    <td>
+                        <a href="javascript:void(0)"><span class="fa fa-pencil" onclick="showModal('EditPromotion', '#addOrEditModal', '#addOrEditModalBody', @item.Id)"></span></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("DeletePromotion", "ContentManagement", new { id = item.Id })" onclick="return confirm('Are sure you want to delete this promotion?');">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6" class="text-center">
+                    <button id="addPromotion" class="btn btn-primary" style="width:50%;" type="button" data-toggle="modal" onclick="showModal('InsertPromotion', '#addOrEditModal', '#addOrEditModalBody', null)">
+                        <i class="fa fa-plus"></i> Add Promotion
+                    </button>
+                </td>
+            </tr>
+        </table>
+        @*@using (Html.BeginForm("UpdatePromotionText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row" style="padding-top:20px">
+                    <div class="col-lg-3">Promotion</div>
+                    <div class="col-lg-1">:</div>
+                    <div class="col-lg-8">
+                        @Html.TextAreaFor(model => model.PromotionModel.Contents, new { @class = "textarea-2", name = "content", id = "promotionText" })
+                        <br />
+                        <small class="text-muted">Jika anda menambahkan/ mengubah gambar, harap mengganti size gambar anda dengan cara klik <b>View -> Source Code</b> kemudian cari image anda dan ganti <b>alt="" width="700" height="120"</b> menjadi <b>class="img-promotion"</b> agar gambar tampil dengan baik. Terima kasih.</small>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:20px">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-8">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            }*@
+    </div>
+    <div id="gameslist" class="tab-pane fade">
+        <h3>Games List</h3>
+        <table class="table-striped" style="width:100%; margin-bottom:20px">
+            @foreach (var item in Model.GamesList)
+            {
+                <tr>
+                    <td>@item.GameName</td>
+                    <td class="text-center"><img src='@string.Format("/Resources/images/{0}", item.GameName + "GAME.png")' style="width:100px; height:50px" /></td>
+
+                    <td>
+                        <a href="javascript:void(0)"><span class="fa fa-pencil" onclick="showModal('EditGame', '#addOrEditModal', '#addOrEditModalBody', @item.Id)"></span></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("DeleteGame", "ContentManagement", new { id = item.Id })" onclick="return confirm('Are sure you want to delete this game?');">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6" class="text-center">
+                    <button id="addGame" class="btn btn-primary" style="width:50%;" type="button" data-toggle="modal" onclick="showModal('InsertGame', '#addOrEditModal', '#addOrEditModalBody', null)">
+                        <i class="fa fa-plus"></i> Add Game
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="contact" class="tab-pane fade">
+        <h3>Contact Us Main Text</h3>
+        @using (Html.BeginForm("UpdateContactText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-12">
+                    @Html.TextAreaFor(model => model.ContactModel.Contents, new { @class = "textarea-2", name = "content", id = "contactUsText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+        <hr />
+        <h3>Contact Images</h3>
+        <div class="row">
+            <div class="col-lg-3">
+                Live Chat
+            </div>
+            @using (Html.BeginForm("UpdateContactLiveChatImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactLiveChat.png" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Yahoo Mail
+            </div>
+            @using (Html.BeginForm("UpdateContactYahooImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactYahoo.png" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                BBM
+            </div>
+            @using (Html.BeginForm("UpdateContactBbmImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactBbm.png" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                Line
+            </div>
+            @using (Html.BeginForm("UpdateContactLineImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactLine.png" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                WeChat
+            </div>
+            @using (Html.BeginForm("UpdateContactWeChatImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactWeChat.PNG" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                WhatsApp
+            </div>
+            @using (Html.BeginForm("UpdateContactWhatsAppImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 100px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+            <div class="col-lg-3 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/contactWhatsApp.png" style="width:100px; height:100px" />
+            </div>
+        </div>
+        <hr />
+        <h3>Contact Us Detail Text</h3>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                Live Chat
+            </div>
+            @using (Html.BeginForm("UpdateContactLiveChatText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactLiveChatModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                Yahoo Mail
+            </div>
+            @using (Html.BeginForm("UpdateContactYahooMailText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactYahooMailModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                BBM
+            </div>
+            @using (Html.BeginForm("UpdateContactBbmText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactBbmModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                Line
+            </div>
+            @using (Html.BeginForm("UpdateContactLineText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactLineModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                WeChat
+            </div>
+            @using (Html.BeginForm("UpdateContactWeChatText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactWeChatModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row" style="margin-bottom:10px">
+            <div class="col-lg-4">
+                WhatsApp
+            </div>
+            @using (Html.BeginForm("UpdateContactWhatsAppText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.ContactWhatsAppModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="bank" class="tab-pane fade">
+        <h3>Bank Logos</h3>
+        <div class="row">
+            <div class="col-lg-5">
+                Main Bank Logo
+            </div>
+            @using (Html.BeginForm("UpdateBankLogosImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 750px x 150px</small>
+                </div>
+                <div class="col-lg-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center" style="background-color:dimgray">
+                <img src="~/Resources/images/bank-logos.png" />
+            </div>
+        </div>
+        <hr />
+        <h3>Bank Images</h3>
+        <table class="table-striped" style="width:100%; margin-bottom:20px">
+            @foreach (var item in Model.BankDepositList)
+            {
+                <tr>
+                    <td>@item.BankName</td>
+                    <td>@item.BankDetails</td>
+                    @{
+                        if (item.Status == 1)
+                        {
+                            <td class="text-center">Active</td>
+                        }
+                        else
+                        {
+                            <td class="text-center">Inactive</td>
+                        }
+                    }
+                    <td class="text-center"><img src='@string.Format("/Resources/images/{0}", "bank" + item.BankName + ".png")' style="width:100px; height:50px" /></td>
+
+                    <td>
+                        <a href="javascript:void(0)"><span class="fa fa-pencil" onclick="showModal('EditBankDeposit', '#addOrEditModal', '#addOrEditModalBody', @item.Id)"></span></a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("DeleteBankDeposit", "ContentManagement", new { id = item.Id })" onclick="return confirm('Are sure you want to delete this bank deposit?');">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6" class="text-center">
+                    <button id="addBankDeposit" class="btn btn-primary" style="width:50%" type="button" data-toggle="modal" onclick="showModal('InsertBankDeposit', '#addOrEditModal', '#addOrEditModalBody', null)">
+                        <i class="fa fa-plus"></i> Add Bank Deposit
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+
+        @*<div class="row">
+                <div class="col-lg-3">
+                    BCA
+                </div>
+                @using (Html.BeginForm("UpdateBankBcaImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 50px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+                <div class="col-lg-3 text-center" style="background-color:dimgray">
+                    <img src="~/Resources/images/bankBca.png" style="width:100px; height:50px" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    Mandiri
+                </div>
+                @using (Html.BeginForm("UpdateBankMandiriImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 50px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+                <div class="col-lg-3 text-center" style="background-color:dimgray">
+                    <img src="~/Resources/images/bankMandiri.png" style="width:100px; height:50px" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    BNI
+                </div>
+                @using (Html.BeginForm("UpdateBankBniImage", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-4">
+                    <input type="file" name="file" accept=".png" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .png only</small><br />
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 100px x 50px</small>
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+                <div class="col-lg-3 text-center" style="background-color:dimgray">
+                    <img src="~/Resources/images/bankBni.png" style="width:100px; height:50px" />
+                </div>
+            </div>
+            <hr />
+            <h3>Bank Detail Text</h3>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-lg-4">
+                    BCA
+                </div>
+                @using (Html.BeginForm("UpdateBankBcaText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.BankBcaModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+            </div>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-lg-4">
+                    Mandiri
+                </div>
+                @using (Html.BeginForm("UpdateBankMandiriText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.BankMandiriModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+            </div>
+            <div class="row" style="margin-bottom:10px">
+                <div class="col-lg-4">
+                    BNI
+                </div>
+                @using (Html.BeginForm("UpdateBankBniText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                <div class="col-lg-6">
+                    @Html.TextBoxFor(model => model.BankBniModel.Contents, new { @class = "form", name = "content" })
+                </div>
+                <div class="col-lg-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                }
+            </div>*@
+    </div>
+    <div id="togel" class="tab-pane fade in active">
+        <h3>Togel</h3>
+        @using (Html.BeginForm("UpdateTogelText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Togel Title</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(model => model.TogelModel.Title, new { @class = "form", name = "content", id = "togelTitle" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Togel Number</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(model => model.TogelModel.TogelText, new { @class = "form", name = "content", id = "togelText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Date</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(model => model.TogelModel.Date, new { @class = "form", name = "content", id = "togelDate" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Closing Time</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextBoxFor(model => model.TogelModel.Time, new { @class = "form timepicker", name = "content", id = "togelTime" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="scripts" class="tab-pane fade in active">
+        @using (Html.BeginForm("UpdateScriptHeadText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Scripts before &lt;/head&gt;</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.ScriptHead.Contents, new { @class = "textarea", name = "content", id = "scriptHeaderText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+        <hr />
+        @using (Html.BeginForm("UpdateScriptBodyText", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Scripts before &lt;/body&gt;</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.TextAreaFor(model => model.ScriptBody.Contents, new { @class = "textarea", name = "content", id = "scriptBodyText" })
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="popUpModal" class="tab-pane fade in active">
+        @using (Html.BeginForm("UpdatePopUpModal", "ContentManagement", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Pop Up Modal Shown</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    @Html.RadioButtonFor(model => model.PopUpStatus.Contents, "Yes") Yes
+                    @Html.RadioButtonFor(model => model.PopUpStatus.Contents, "No") No
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-3">Pop Up Modal Content</div>
+                <div class="col-lg-1">:</div>
+                <div class="col-lg-8">
+                    <input type="file" name="file" accept=".jpg .png .gif" class="form-control-file" id="inputFile" aria-describedby="fileHelp">
+                    <small id="fileHelp" class="form-text text-muted">Accepts .jpg only</small>
+                    <small id="fileHelp" class="form-text text-muted">Image size must be 900px x 600px</small>
+                </div>
+            </div>
+            <div class="row" style="padding-top:20px">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="addOrEditModalBody"></div>
+</div>
+
+<script src="~/Scripts/contentManagement.js"></script>

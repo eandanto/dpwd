@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Resources/images/favicon-32x32.png">
+    <title>303 Admin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/Resources/css/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    @*<link href="~/Resources/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <!-- DataTables Responsive CSS -->
+    <link href="~/Resources/css/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="~/Resources/css/timeline.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Resources/css/startmin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="~/Resources/css/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- JQuery UI -->
+    <link href="~/Resources/css/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+    <link href="~/Resources/css/jquery.timepicker.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: 14px;">
+            <div class="navbar-header">
+                <img class="logo-img" src="~/Resources/images/logo-short.png" />
+            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Top Navigation: Right Menu -->
+            <ul class="nav navbar-right navbar-top-links">
+                @*<li id="notif" class="dropdown navbar-inverse">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i id="notifIcon" class="fa fa-bell fa-fw">
+                                <span id="notifNum" class="num"></span>
+                            </i>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="notifList" class="dropdown-menu dropdown-alerts" style="width:175px"></ul>
+                    </li>*@
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> @Session["userName"] <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="/UserManagement/Index/"><i class="fa fa-user fa-fw"></i> User Management</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/Login/Logout/"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu" style="font-size: 19px;">
+                        <li>
+                            <a href="/Dashboard/Index" class="side-text"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/Member/Index" class="side-text"><i class="fa fa-user fa-fw"></i> Members <em id="notifMember"></em></a>
+                        </li>
+                        <li>
+                            <a href="#" class="side-text"><i class="fa fa-download fa-fw"></i> Deposit <em id="notifDeposit"></em><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/Deposit/Index" class="side-text">Confirmation</a>
+                                </li>
+                                <li>
+                                    <a href="/Deposit/Reports" class="side-text">Report</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="side-text"><i class="fa fa-upload fa-fw"></i> Withdrawal <em id="notifWithdrawal"></em><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/Withdrawal/Index" class="side-text">Confirmation</a>
+                                </li>
+                                <li>
+                                    <a href="/Withdrawal/Reports" class="side-text">Report</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/ContentManagement/Index" class="side-text"><i class="fa fa-pencil fa-fw"></i> Content Management</a>
+                        </li>
+                        <li>
+                            <a href="/Settings/Index" class="side-text"><i class="fa fa-cog fa-fw"></i> Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 scroll" style="margin-top:25px">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <audio id="myAudio">
+            <source src="~/Resources/sound/new_notification.mp3" type="audio/mpeg" />
+        </audio>
+    </div>
+    <!-- jQuery -->
+    <script src="~/Resources/js/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Resources/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Resources/js/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Resources/js/startmin.js"></script>
+    <!-- Data Tables -->
+    @*<script src="~/Resources/js/dataTables/jquery.dataTables.min.js"></script>*@
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+    <script src="~/Resources/js/dataTables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Resources/js/jquery-ui-1.9.2.custom.js"></script>
+    <script src="~/Scripts/notification.js"></script>
+    <script src="~/Resources/js/jquery.timepicker.js"></script>
+    <script src="~/Resources/js/jquery.mask.min.js"></script>
+</body>
+</html>
